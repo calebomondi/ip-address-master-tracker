@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+  <!--Leafletjs library-->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <!--BS CSS CDS-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <!--CSS external file-->
+  <link rel="stylesheet" href="style.css">
+
+  <title>Frontend Mentor | IP Address Tracker</title>
+
+</head>
+<body>
+    <div class="containerM">
+      <div class="topDiv">
+        <p class="title">IP Address Tracker</p>
+        <div class="search">
+          <input type="text" id="searchItem" placeholder="Search for any IP address">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="15"><path fill="none" stroke="#FFF" stroke-width="3" d="M2 1l6 6-6 6"/></svg>
+        </div>
+      </div>
+      <div class="info">
+        <div class="id ipAdd">
+          <p class="name">IP ADDRESS</p>
+          <p class="details ip">80.8.8.8</p>
+        </div>
+        <div class="id leftBord">
+          <p class="name">LOCATION</p>
+          <p class="details location">Paris, Île-de-France</p>
+        </div>
+        <div class="id leftBord">
+          <p class="name">TIMEZONE</p>
+          <p class="details timezone">GMT +02:00</p>
+        </div>
+        <div class="id leftBord">
+          <p class="name">ISP</p>
+          <p class="details isp">Orange S.A.</p>
+        </div>
+      </div>
+      <div id="map">
+      </div>
+    </div>
+
+    <!--external JS file-->
+    <script src="script.js"></script>
+
+    <!--internal Js file-->
+    <script>   
+      function renderImage() {
+        if(map) {
+          map.remove();
+        }
+
+        var mapOptions = {
+            center: [lat, long],
+            zoom: 10
+        }
+
+        map = new L.map('map', mapOptions);
+        var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+        map.addLayer(layer);
+        var marker = L.marker([lat, long]);
+        marker.addTo(map);
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        renderImage();
+      });
+    </script>
+  
+  <!--BS JS CDN-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>
+</html>
